@@ -1,57 +1,51 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+"use client";
 
-export default function Home() {
+import { routePath } from "components/BottomBar/config";
+import { usePathname, useRouter } from "next/navigation";
+import { useEffect } from "react";
+import { useUserContext } from "../context/user";
+
+export default function LandingPage() {
+  const { login, userToken } = useUserContext();
+  const router = useRouter();
+  const pathName = usePathname();
+
+  useEffect(() => {
+    if (!userToken) return;
+    if (pathName === "/") {
+      router.push(routePath.challengeList);
+    }
+  }, [userToken]);
+
+  const loginHandler = async () => {
+    const isAuthenticated = await login();
+    if (isAuthenticated) {
+      router.push(routePath.challengeList);
+    }
+  };
+
   return (
-    <div className={styles.container}>
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js 13!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>app/page.tsx</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://beta.nextjs.org/docs" className={styles.card}>
-            <h2>Documentation &rarr;</h2>
-            <p>Find in-depth information about Next.js 13</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/canary/examples"
-            className={styles.card}
-          >
-            <h2>Examples &rarr;</h2>
-            <p>Explore the Next.js 13 playground.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/templates/next.js/app-directory?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.card}
-          >
-            <h2>Deploy &rarr;</h2>
-            <p>Deploy your Next.js site to a public URL with Vercel.</p>
-          </a>
-        </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
+    <div className="flex flex-col justify-between bg-landing h-full w-full p-edges">
+      <div className="text-center">
+        <span className="text-4xl text-lead">
+          Accept the <strong>challenge</strong> with us!
+        </span>
+      </div>
+      <div className="flex flex-col gap-[40px]">
+        <div>
+          <span className="text-lg text-coronation">
+            Start the challenge by click on the “Start” button below
           </span>
-        </a>
-      </footer>
+        </div>
+        <div className="text-center">
+          <button
+            onClick={loginHandler}
+            className="h-[80px] w-[80px] bg-coronation text-lead text-xl rounded-full font-bold active:scale-90"
+          >
+            Start
+          </button>
+        </div>
+      </div>
     </div>
-  )
+  );
 }
