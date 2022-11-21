@@ -2,12 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
-html,
+html {
+  scrollbar-gutter: stable;
+}
+
 body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans,
-    Helvetica Neue, sans-serif;
+  overflow: auto;
+  font-weight: 400;
+  min-width: 320px;
+  max-width: 100vw;
+  width: 100%;
+  position: relative;
+  height: calc(var(--vh, 1vh) * 100);
 }
 
 a {
@@ -17,8 +23,22 @@ a {
 
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: none;
+  outline: none;
+
+  &::before,
+  &::after {
+    box-sizing: border-box;
+  }
 }
 
 [data-nextjs-scroll-focus-boundary] {
   display: contents;
+}
+
+html {
+  scrollbar-gutter: stable;
 }
