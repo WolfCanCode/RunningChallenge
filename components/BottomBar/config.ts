@@ -8,7 +8,7 @@ const baseChallenge = '/challenge';
 export const routePath = {
   challengeList: baseChallenge + '/all',
   onGoingList: baseChallenge + '/ongoings',
-  achivementList: baseChallenge + '/achivements',
+  achivementList: baseChallenge + '/achievements',
 };
 export const menus: MenuType[] = [
   { title: '🔥', path: routePath.challengeList },

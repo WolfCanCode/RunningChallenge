@@ -3,23 +3,25 @@
 import { ChallengeItem, Loader } from "components";
 import { routePath } from "components/BottomBar/config";
 import { useUserContext } from "context/user";
+import dayjs from "dayjs";
 import { useRouter } from "next/navigation";
 import { ChallengeData } from "pages/api/getActiveChallengesForPlayer";
+import { AchievementData } from "pages/api/getPlayerAchievements";
 import { useEffect, useState } from "react";
 
-export default function AllChallenge() {
+export default function AllAchievement() {
   const router = useRouter();
   const { userToken } = useUserContext();
   const [isLoading, setLoading] = useState(false);
   const [isLoadingChallenge, setLoadingChallenge] = useState<
     { [key: string]: boolean }
   >({});
-  const [challenges, setChallenges] = useState<ChallengeData[]>([]);
+  const [challenges, setChallenges] = useState<AchievementData[]>([]);
 
   const fetchData = async () => {
     setLoading(true);
-    const challenges: ChallengeData[] = await fetch(
-      "/api/getActiveChallengesForPlayer",
+    const challenges: AchievementData[] = await fetch(
+      "/api/getPlayerAchievements",
       {
         headers: { "Authorization": `Bearer ${userToken}` },
       },
@@ -48,7 +50,7 @@ export default function AllChallenge() {
 
   return (
     <div className="flex flex-col gap-[40px]">
-      <p className="text-4xl font-bold">Ready? 🔥</p>
+      <p className="text-4xl font-bold">Completed 🏅</p>
       {isLoading ? <Loader /> : null}
       {challenges.map((challenge) => (
         <ChallengeItem
@@ -60,10 +62,9 @@ export default function AllChallenge() {
             label: "🔥",
             value: challenge.level,
           }, {
-            label: "🎯",
-            value: challenge.durationInMillis / 1000 + "s",
+            label: "🏅",
+            value: dayjs(challenge.grantedAt).format("YYYY/MM/DD"),
           }]}
-          buttonLabel={isLoadingChallenge[challenge.id] ? "..." : "Go"}
           onClick={() => joinChallenge(challenge.id)}
         />
       ))}
