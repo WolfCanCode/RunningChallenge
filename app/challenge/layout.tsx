@@ -1,16 +1,38 @@
 "use client";
 
-import { BottomBar } from "components";
+import { BottomBar, Loader, TopBar } from "components";
+import { routePath } from "components/BottomBar/config";
+import { UserStatus, useUserContext } from "context/user";
+import { usePathname, useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function ChallengeLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const { userStatus } = useUserContext();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (userStatus !== UserStatus.UNAUTHENTICATED) return;
+    router.push("/");
+  }, [userStatus]);
   return (
-    <div className="relative flex flex-col justify-between h-full w-full p-edges">
-      {children}
-      <BottomBar />
-    </div>
+    userStatus && userStatus === UserStatus.AUTHENTICATED
+      ? (
+        <div className="relative w-full h-full bg-coronation px-edges">
+          <div className="w-full h-[calc(100%_-_86px)]  overflow-y-auto">
+            <div className="my-[40px]">
+              <TopBar />
+              <div className="mt-[40px]">
+                {children}
+              </div>
+            </div>
+          </div>
+          <BottomBar />
+        </div>
+      )
+      : <Loader />
   );
 }

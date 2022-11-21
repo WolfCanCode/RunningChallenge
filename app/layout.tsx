@@ -16,7 +16,7 @@ export default function RootLayout({
       <body>
         <div className="h-screen w-screen bg-lead relative flex flex-col justify-center">
           <div className="
-            h-[932px] w-[430px] max-h-[932px] max-w-[430px] overflow-hidden 
+            lg:h-[932px] lg:w-[430px] lg:max-h-[932px] lg:max-w-[430px] h-full w-full  overflow-hidden 
             bg-coronation m-auto relative border-coronation border-solid border-2
             rounded-xl">
             {/* Manages user token */}
