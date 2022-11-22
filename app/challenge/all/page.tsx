@@ -34,6 +34,7 @@ export default function AllChallenge() {
       "/api/joinPlayerOnChallenge",
       {
         method: "POST",
+        headers: { "Authorization": `Bearer ${userToken}` },
         body: JSON.stringify({ challengeId }),
       },
     ).then((response) => response.json()).then((data) => data);

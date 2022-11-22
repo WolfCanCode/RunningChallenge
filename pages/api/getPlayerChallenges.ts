@@ -46,7 +46,6 @@ export default async function handler(
   )
     .then((response) => response.json())
     .then((data) => data);
-  console.log(challengeData);
   res.status(200).json(mappingData(challengeData));
 }
 
