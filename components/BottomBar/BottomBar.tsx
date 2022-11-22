@@ -1,6 +1,5 @@
 import { usePathname, useRouter } from "next/navigation";
 import { menus, MenuType } from "./config";
-import { motion } from "framer-motion";
 
 export const BottomBar = () => {
   const pathName = usePathname();

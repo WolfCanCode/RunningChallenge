@@ -1,7 +1,6 @@
 "use client";
 
 import { useWindowSize } from "hooks/useWindowSize";
-import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { UserContextWrapper, useUserContext } from "../context/user";
 import "./globals.css";
@@ -17,6 +16,7 @@ export default function RootLayout({
     const vh = window.innerHeight * 0.01;
     document.documentElement.style.setProperty("--vh", `${vh}px`);
   }, [width, height]);
+
   return (
     <html lang="en">
       <head />

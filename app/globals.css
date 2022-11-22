@@ -28,11 +28,11 @@ a {
   background: none;
   border: none;
   outline: none;
+}
 
-  &::before,
-  &::after {
-    box-sizing: border-box;
-  }
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
 [data-nextjs-scroll-focus-boundary] {
