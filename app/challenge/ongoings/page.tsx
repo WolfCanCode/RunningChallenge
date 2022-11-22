@@ -8,7 +8,6 @@ import { useEffect, useMemo, useState } from "react";
 export default function OngoingChallenge() {
   const { userToken } = useUserContext();
   const [isLoading, setLoading] = useState(false);
-  const [renderValue, triggerRender] = useState(false);
   const [challenges, setChallenges] = useState<ChallengeOngoingData[]>([]);
 
   const fetchData = async () => {

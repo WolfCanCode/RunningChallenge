@@ -2,7 +2,7 @@
 
 import { Loader } from "components";
 import { routePath } from "components/BottomBar/config";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { UserStatus, useUserContext } from "../context/user";
 
@@ -11,7 +11,6 @@ export default function LandingPage() {
   const [isLoading, setLoading] = useState(false);
 
   const router = useRouter();
-  const pathName = usePathname();
 
   useEffect(() => {
     if (userStatus !== UserStatus.AUTHENTICATED) return;

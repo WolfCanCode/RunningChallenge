@@ -1,9 +1,8 @@
 "use client";
 
 import { BottomBar, Loader, TopBar } from "components";
-import { routePath } from "components/BottomBar/config";
 import { UserStatus, useUserContext } from "context/user";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 export default function ChallengeLayout({
